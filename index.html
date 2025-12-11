@@ -305,9 +305,19 @@
   50% { transform: translate3d(10%, 10%, 0) scale(1.35); }
   100% { transform: translate3d(-20%, -10%, 0) scale(1.3); }
 }
+    /* Remove download button from built-in audio controls */
+audio::-webkit-media-controls-download-button {
+  display: none !important;
+}
+
+audio::-webkit-media-controls-enclosure {
+  overflow: hidden !important;
+}
+
   </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
+
   <div class="fog"></div>
   <div class="fog fog2"></div>
 
