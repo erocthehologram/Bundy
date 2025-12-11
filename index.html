@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phone Music Player</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>My Phone Music Player</h1>
+      <p>Select audio files from your phone and play them here.</p>
+    </header>
+
+    <section class="controls">
+      <label class="file-button">
+        <input
+          type="file"
+          id="file-input"
+          accept="audio/*"
+          multiple
+          hidden
+        />
+        Choose Music Files
+      </label>
+      <p class="hint">Your files never leave your device. Everything plays locally.</p>
+    </section>
+
+    <section class="player">
+      <div class="now-playing">
+        <span class="label">Now Playing:</span>
+        <span id="current-track-name">Nothing yet</span>
+      </div>
+
+      <audio id="audio-player" controls></audio>
+
+      <div class="player-buttons">
+        <button id="prev-btn" disabled>&laquo; Prev</button>
+        <button id="play-pause-btn" disabled>Play</button>
+        <button id="next-btn" disabled>Next &raquo;</button>
+      </div>
+    </section>
+
+    <section class="track-list-section">
+      <h2>Playlist</h2>
+      <ul id="track-list"></ul>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
