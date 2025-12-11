@@ -90,10 +90,8 @@ function renderTrackList() {
     nameSpan.className = "track-name";
     nameSpan.textContent = track.name;
 
-    const playBtn = document.createElement("button");
-    playBtn.className = "track-play-btn";
-    playBtn.textContent = "Play";
-    playBtn.addEventListener("click", () => {
+    // NEW: clicking anywhere on the row selects & plays the track
+    li.addEventListener("click", () => {
       setCurrentTrack(index);
       audioPlayer.play();
       updatePlayPauseButton();
@@ -101,7 +99,6 @@ function renderTrackList() {
 
     li.appendChild(indexSpan);
     li.appendChild(nameSpan);
-    li.appendChild(playBtn);
     trackListEl.appendChild(li);
   });
 
