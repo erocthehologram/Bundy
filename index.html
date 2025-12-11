@@ -336,7 +336,12 @@ audio::-webkit-media-controls-enclosure {
         <span id="current-track-name">Nothing yet</span>
       </div>
 
-      <audio id="audio-player" controls></audio>
+      <audio
+  id="audio-player"
+  controls
+  controlsList="nodownload noplaybackrate noremoteplayback"
+></audio>
+
 
       <div class="player-buttons">
         <button id="prev-btn" disabled>&laquo; Prev</button>
