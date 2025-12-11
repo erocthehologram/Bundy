@@ -1,0 +1,297 @@
+/* ===== GLOBAL RESET ===== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #000000;
+  color: #e5e7eb;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px 12px;
+}
+
+/* ===== MAIN APP CARD (GLASS) ===== */
+
+.app {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  border-radius: 28px;
+  padding: 20px 18px 26px;
+  background:
+    radial-gradient(circle at top left, rgba(148, 163, 184, 0.12), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.16), transparent 55%),
+    rgba(15, 23, 42, 0.82);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.95),
+    0 0 0 1px rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== HEADER ===== */
+
+.header {
+  margin-bottom: 10px;
+}
+
+.header h1 {
+  margin: 0 0 4px;
+  font-size: 1.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f9fafb;
+}
+
+.header p {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+
+/* ===== PLAYER SECTION ===== */
+
+.player {
+  margin-top: 16px;
+}
+
+/* COVER ART – GLOW + FOG */
+
+.cover-art {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1 / 1;
+  margin: 8px auto 16px;
+  border-radius: 26px;
+  overflow: hidden;
+
+  /* JS sets background-image; this is fallback */
+  background-color: #020617;
+  background-size: cover;
+  background-position: center;
+
+  /* Neon glow */
+  box-shadow:
+    0 0 40px rgba(248, 250, 252, 0.24),
+    0 0 100px rgba(59, 130, 246, 0.55),
+    0 0 150px rgba(251, 191, 36, 0.6);
+}
+
+/* Fog layers */
+
+.cover-art::before,
+.cover-art::after {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.14), transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(148, 163, 184, 0.18), transparent 55%),
+    radial-gradient(circle at 50% 0%, rgba(248, 250, 252, 0.12), transparent 60%);
+  mix-blend-mode: screen;
+  opacity: 0.65;
+  animation: fogDrift 26s linear infinite;
+}
+
+.cover-art::after {
+  opacity: 0.4;
+  animation-duration: 40s;
+  animation-direction: reverse;
+}
+
+@keyframes fogDrift {
+  0% {
+    transform: translate3d(-12%, 0, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(10%, 2%, 0) scale(1.07);
+  }
+  100% {
+    transform: translate3d(-12%, 0, 0) scale(1.05);
+  }
+}
+
+/* ===== NOW PLAYING / AUDIO ===== */
+
+.now-playing {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.now-playing span:first-child {
+  color: #9ca3af;
+}
+
+#current-track-name {
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+audio {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+/* ===== BUTTONS ===== */
+
+.player-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.player-buttons button {
+  flex: 1;
+  padding: 8px 0;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+.player-buttons button:hover:enabled {
+  background: radial-gradient(
+    circle at top,
+    rgba(248, 250, 252, 0.12),
+    rgba(15, 23, 42, 0.95)
+  );
+  transform: translateY(-1px);
+}
+
+.player-buttons button:active:enabled {
+  transform: scale(0.97);
+}
+
+.player-buttons button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.secondary-buttons {
+  margin-top: 6px;
+}
+
+/* Highlight when shuffle/repeat are active */
+#shuffle-btn.active,
+#repeat-btn.active {
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.35);
+}
+
+/* ===== TRACK LIST ===== */
+
+.tracklist-section {
+  margin-top: 20px;
+}
+
+.tracklist-section h2 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #e5e7eb;
+}
+
+#track-list {
+  list-style: none;
+  max-height: 260px;
+  overflow-y: auto;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(55, 65, 81, 0.85);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+}
+
+.track-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+.track-item:last-child {
+  border-bottom: none;
+}
+
+.track-index {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-right: 6px;
+}
+
+.track-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-play-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background: #1f2937;
+  color: #e5e7eb;
+  white-space: nowrap;
+}
+
+.track-play-btn:active {
+  transform: scale(0.97);
+}
+
+/* Active track row + glowing title */
+
+.track-item.active {
+  background: radial-gradient(
+    circle at left,
+    rgba(251, 191, 36, 0.17),
+    rgba(15, 23, 42, 0.96)
+  );
+}
+
+.track-item.active .track-name {
+  color: #fbbf24;
+  text-shadow: 0 0 12px rgba(251, 191, 36, 0.7);
+}
+
+/* ===== MOBILE TWEAKS ===== */
+
+@media (max-width: 400px) {
+  .app {
+    padding: 16px 12px 18px;
+  }
+
+  .header h1 {
+    font-size: 1.4rem;
+  }
+}
