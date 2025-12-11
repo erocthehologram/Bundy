@@ -322,6 +322,26 @@ audio::-webkit-media-controls-download-button {
 audio::-webkit-media-controls-enclosure {
   overflow: hidden !important;
 }
+    /* --- Fullscreen desktop background video --- */
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -3;         /* behind fog + app */
+  pointer-events: none;
+  display: block;
+}
+
+/* Hide video on mobile/tablet */
+@media (max-width: 768px) {
+  #bg-video {
+    display: none;
+  }
+}
+
 
   </style>
 </head>
