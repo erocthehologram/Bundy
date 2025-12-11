@@ -203,3 +203,28 @@ audio {
     font-size: 1.2rem;
   }
 }
+.cover-art {
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  margin: 4px auto 8px;
+  background: radial-gradient(circle at 10% 20%, #1e293b, #020617 40%, #111827 80%);
+  border: 1px solid #1f2933;
+  background-size: cover;
+  background-position: center;
+}
+
+.secondary-buttons {
+  margin-top: 4px;
+}
+
+.secondary-buttons button {
+  font-size: 0.8rem;
+}
+
+#shuffle-btn.active,
+#repeat-btn.active {
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.3);
+}
