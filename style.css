@@ -9,7 +9,7 @@
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-  background: #0f172a;
+  background: #000000;
   color: #e5e7eb;
   min-height: 100vh;
   display: flex;
@@ -22,7 +22,7 @@ body {
   width: 100%;
   max-width: 480px;
   margin: auto;
-  background: #020617;
+  background: transparent;
   border-radius: 18px;
   padding: 18px 16px 20px;
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
@@ -38,7 +38,7 @@ body {
 
 .header p {
   font-size: 0.9rem;
-  color: #9ca3af;
+  color: #ffffff;
 }
 
 .controls {
@@ -189,9 +189,12 @@ audio {
   background: #111827;
 }
 
+
 .track-item.active .track-name {
   color: #fbbf24;
+  text-shadow: 0 0 12px rgba(251, 191, 36, 0.7);
 }
+
 
 /* Mobile tweaks */
 @media (max-width: 400px) {
@@ -227,4 +230,146 @@ audio {
 #repeat-btn.active {
   border-color: #fbbf24;
   box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.3);
+}
+/* === GLASS CONTAINER / CARD === */
+.app {
+  max-width: 420px;
+  margin: 24px auto;
+  padding: 20px 18px 28px;
+  border-radius: 28px;
+  background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.12), transparent 55%)
+            ,radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.16), transparent 55%)
+            ,rgba(15, 23, 42, 0.78);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.95),
+    0 0 0 1px rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+/* Header tweaks for the new vibe */
+.header h1 {
+  margin: 0 0 4px;
+  font-size: 1.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f9fafb;
+}
+
+.header p {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+
+/* Make sections sit inside the glass card better */
+.player,
+.tracklist-section {
+  margin-top: 20px;
+}
+
+/* Buttons as glass pills */
+.player-buttons button {
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  color: #e5e7eb;
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+.player-buttons button:hover:enabled {
+  background: radial-gradient(circle at top, rgba(248, 250, 252, 0.12), rgba(15, 23, 42, 0.95));
+  transform: translateY(-1px);
+}
+
+.player-buttons button:disabled {
+  opacity: 0.4;
+}
+
+/* Track list glass rows */
+.track-list {
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(55, 65, 81, 0.8);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+}
+
+.track-item {
+  border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+.track-item:last-child {
+  border-bottom: none;
+}
+
+.track-item.active {
+  background: radial-gradient(circle at left, rgba(251, 191, 36, 0.17), rgba(15, 23, 42, 0.96));
+}
+
+.track-item.active .track-name {
+  color: #fbbf24;
+}
+/* === COVER ART GLOW + FOG === */
+.cover-art {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1 / 1;
+  margin: 10px auto 14px;
+  border-radius: 26px;
+  overflow: hidden;
+
+  /* The actual image comes from JS via background-image */
+  background-color: #020617;
+  background-size: cover;
+  background-position: center;
+
+  /* Neon glow around album */
+  box-shadow:
+    0 0 40px rgba(248, 250, 252, 0.24),
+    0 0 100px rgba(59, 130, 246, 0.55),
+    0 0 150px rgba(251, 191, 36, 0.6);
+}
+
+/* Fog layers */
+.cover-art::before,
+.cover-art::after {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.14), transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(148, 163, 184, 0.18), transparent 55%),
+    radial-gradient(circle at 50% 0%, rgba(248, 250, 252, 0.12), transparent 60%);
+
+  mix-blend-mode: screen;
+  opacity: 0.65;
+  animation: fogDrift 26s linear infinite;
+}
+
+.cover-art::after {
+  opacity: 0.4;
+  animation-duration: 40s;
+  animation-direction: reverse;
+}
+
+/* Fog motion */
+@keyframes fogDrift {
+  0% {
+    transform: translate3d(-12%, 0, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(10%, 2%, 0) scale(1.07);
+  }
+  100% {
+    transform: translate3d(-12%, 0, 0) scale(1.05);
+  }
 }
